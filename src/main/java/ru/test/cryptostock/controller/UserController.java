@@ -31,14 +31,14 @@ public class UserController {
         return walletService.getAllWallets(id);
     }
 
-    @PostMapping("/{id}/wallet/{walletId}")
-    public ResponseEntity <String> addCash (@PathVariable Long id, @PathVariable String walletId,
-                                            @RequestBody RefillFundRequest refillFundRequest) {
-
-
-
-
-
-    return ResponseEntity.ok(walletService.addCash(id, walletId, refillFundRequest));
-    }
+//    @PostMapping("/{id}/wallet/{walletId}")
+//    public ResponseEntity <String> addCash (@PathVariable Long id, @PathVariable String walletId,
+//                                            @RequestBody RefillFundRequest refillFundRequest) {
+//
+//
+//
+//
+//
+//    return ResponseEntity.ok(walletService.addCash(id, walletId, refillFundRequest));
+//    }
 }

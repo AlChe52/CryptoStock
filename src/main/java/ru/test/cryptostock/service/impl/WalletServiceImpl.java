@@ -25,6 +25,7 @@ public class WalletServiceImpl implements WalletService {
    
     private final UserRepository userRepository;
     private final CurrencyRepository currencyRepository;
+
     private final WalletRepository walletRepository;
     @Override
     public Wallet createWallet(Long id) {
@@ -47,7 +48,6 @@ public class WalletServiceImpl implements WalletService {
 
        user.setWallet(wallets);
        userRepository.save(user);
-        System.out.println(user.getWallet().get(wallets.size()-1));
 
       return user.getWallet().get(wallets.size()-1);
     }
@@ -57,60 +57,68 @@ public class WalletServiceImpl implements WalletService {
         var user = userRepository.findById(id).get();
 
         return user.getWallet();
-    }
-
-    @Override
-    public String addCash(Long id, String walletId, RefillFundRequest refillFundRequest) {
-        var user = userRepository.findById(id).get();
-        var wallets = user.getWallet();
-        Wallet wallet = null;
-
-        for (int i=0; i<wallets.size();i++) {
-            if (wallets.get(i).getId().equals(walletId)) {
-                wallet = wallets.get(i);
-                System.out.println(wallet);
-                break;
+     }
 
 
-                ArrayList<Object> walletTransactions;
-                if (wallet.getWalletTransaction().isEmpty()) {
-                    walletTransactions = new ArrayList<>();
-                }
 
-                var walletTransaction = new WalletTransaction();
-
-                walletTransaction.setTransactionType(TransactionType.ADD);
-                walletTransaction.setTransactionDate(LocalDateTime.now());
-                walletTransaction.setCurrencyTo(currencyRepository.findCurrencyByCurrencyType(refillFundRequest.getCurrency()));
-                walletTransaction.setTransactionAmount(refillFundRequest.getTransactionAmount());
-                walletTransactions.add(walletTransaction);
-
-                wallet.setWalletTransaction(walletTransactions);
-
-                var walletFunds = wallet.getWalletFunds();
-                WalletFund walletFund = null;
-
-                for (int y = 0; y < wallets.size(); y++) {
-                    if (walletFunds.get(i).getCurrency().equals(refillFundRequest.getCurrency())) {
-                        walletFund = walletFunds.get(i);
-                        break;
-                    }
-                }
-                walletFund.setBalance(walletFund.getBalance().add(refillFundRequest.getTransactionAmount()));
-
-                walletFunds.add(walletFund);
-
-                wallet.setWalletFunds(walletFunds);
-                wallets.add(wallet);
-                user.setWallet(wallets);
-            }
-        }
-        userRepository.save(user);
-
-        String s = "Balance wallet "+wallet.getId()+" = ";
-
-        return s;
-    }
+//    @Override
+//    public String addCash(Long id, String walletId, RefillFundRequest refillFundRequest) {
+//
+//
+//
+//        var user = userRepository.findById(id);
+//        var wallet = walletRepository.findById(walletId);
+//        Wallet wallet = null;
+//
+//        for (int i=0; i<wallets.size();i++) {
+//            if (wallets.get(i).getId().equals(walletId)) {
+//                wallet = wallets.get(i);
+//                System.out.println(wallet);
+//                break;
+//            }
+//        }
+//
+//
+//            var walletTransactions = wallet.getWalletTransaction();
+//
+//                if (wallet.getWalletTransaction().isEmpty()) {
+//                    walletTransactions = new ArrayList<>();
+//                }
+//
+//                var walletTransaction = new WalletTransaction();
+//
+//                walletTransaction.setTransactionType(TransactionType.ADD);
+//                walletTransaction.setTransactionDate(LocalDateTime.now());
+//                walletTransaction.setCurrencyTo(currencyRepository.findCurrencyByCurrencyType(refillFundRequest.getCurrency()));
+//                walletTransaction.setTransactionAmount(refillFundRequest.getTransactionAmount());
+//                walletTransactions.add(walletTransaction);
+//
+//                wallet.setWalletTransaction(walletTransactions);
+//
+//                var walletFunds = wallet.getWalletFunds();
+//                WalletFund walletFund = null;
+//
+//                for (int i = 0; i < wallets.size(); i++) {
+//                    if (walletFunds.get(i).getCurrency().equals(refillFundRequest.getCurrency())) {
+//                        walletFund = walletFunds.get(i);
+//                        break;
+//                    }
+//                }
+//                walletFund.setBalance(walletFund.getBalance().add(refillFundRequest.getTransactionAmount()));
+//
+//                walletFunds.add(walletFund);
+//
+//                wallet.setWalletFunds(walletFunds);
+//                wallets.add(wallet);
+//                user.get().setWallet(wallets);
+//
+//
+//        userRepository.save(user.get());
+//
+//        String s = "Balance wallet "+wallet.getId()+" = ";
+//
+//        return s;
+//    }
 
     @Override
     public Wallet exchangeCurrency(Long id) {

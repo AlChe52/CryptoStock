@@ -14,7 +14,7 @@ public interface WalletService {
 
     List<Wallet>getAllWallets(Long id);
 
-    String addCash (Long id, String walletId, RefillFundRequest refillFundRequest);
+   // String addCash (Long id, String walletId, RefillFundRequest refillFundRequest);
 
     Wallet exchangeCurrency(Long id);
 
