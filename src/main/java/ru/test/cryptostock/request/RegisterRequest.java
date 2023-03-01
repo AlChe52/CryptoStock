@@ -1,4 +1,4 @@
-package ru.test.cryptostock.auth;
+package ru.test.cryptostock.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,4 +15,6 @@ public class RegisterRequest {
     private String lastName;
     private String email;
     private String password;
+
+
 }

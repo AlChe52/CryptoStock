@@ -1,4 +1,4 @@
-package ru.test.cryptostock.config;
+package ru.test.cryptostock.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package ru.test.cryptostock.auth;
+package ru.test.cryptostock.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.test.cryptostock.auth.AuthenticationRequest;
+import ru.test.cryptostock.auth.AuthenticationResponse;
+import ru.test.cryptostock.auth.AuthenticationService;
+import ru.test.cryptostock.request.RegisterRequest;
 
 @RestController
-@RequestMapping("/api/v1/aut")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -16,6 +20,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register (@RequestBody RegisterRequest request){
+
         return ResponseEntity.ok(service.register(request));
 
     }

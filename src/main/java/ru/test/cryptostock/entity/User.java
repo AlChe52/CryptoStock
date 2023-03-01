@@ -1,4 +1,4 @@
-package ru.test.cryptostock.user;
+package ru.test.cryptostock.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,6 +34,8 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany
+    private List <Wallet> wallet;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
