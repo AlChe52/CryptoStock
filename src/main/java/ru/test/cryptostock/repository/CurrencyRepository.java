@@ -5,5 +5,7 @@ import ru.test.cryptostock.entity.Currency;
 
 public interface CurrencyRepository extends JpaRepository <Currency,Long> {
 
+    Currency findCurrencyByCurrencyType (String name);
+
 
 }

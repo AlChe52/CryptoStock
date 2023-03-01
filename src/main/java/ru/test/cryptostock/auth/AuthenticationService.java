@@ -6,19 +6,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.test.cryptostock.entity.Wallet;
-import ru.test.cryptostock.repository.WalletRepository;
 import ru.test.cryptostock.service.JwtService;
 import ru.test.cryptostock.repository.UserRepository;
 import ru.test.cryptostock.request.RegisterRequest;
 import ru.test.cryptostock.entity.Role;
 import ru.test.cryptostock.entity.User;
 import ru.test.cryptostock.service.WalletService;
-
-import java.awt.event.WindowListener;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -45,13 +38,13 @@ public class AuthenticationService {
                     .build();
             userRepository.save(user);
 
-          var wallet=  walletService.createWallet(user.getId());
+        var  wallet= walletService.createWallet(user.getId());
 
         var jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
-                .walletId(wallet.getId().toString())
+              .walletId(wallet.getId().toString())
                 .build();
     }
 
@@ -61,7 +54,7 @@ public class AuthenticationService {
                 request.getPassword()
 
         ));
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(()-> new UsernameNotFoundException("User npt found"));
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(()-> new UsernameNotFoundException("User not found"));
 
         var jwtToken = jwtService.generateToken(user);
 

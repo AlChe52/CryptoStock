@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:8081/cryptostock
-    username: postgres
-    password: 1111
+    username: admin
+    password: admin
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -13,6 +13,7 @@ spring:
         format-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
 
 
 

@@ -36,8 +36,8 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany
-    private HashMap<String,Wallet> wallet;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Wallet> wallet;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

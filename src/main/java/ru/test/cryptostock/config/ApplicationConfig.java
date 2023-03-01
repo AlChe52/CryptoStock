@@ -1,3 +1,4 @@
+
 package ru.test.cryptostock.config;
 
 import lombok.RequiredArgsConstructor;
@@ -60,11 +61,10 @@ public class ApplicationConfig {
                 .build();
         currencyRepository.save(currency2);
     }
-
     @Bean
     public UserDetailsService userDetailsService () {
         return username -> userRepository.findByEmail(username)
-                .orElseThrow(()->new UsernameNotFoundException("User not found"));
+                .orElseThrow(()->new UsernameNotFoundException("USer not found"));
     }
     @Bean
     public AuthenticationProvider authenticationProvider () {

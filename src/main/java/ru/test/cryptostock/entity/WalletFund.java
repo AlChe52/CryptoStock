@@ -16,8 +16,8 @@ public class WalletFund {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Currency currency;
-    private BigDecimal walletFunds;
+    private BigDecimal balance;
 
 }

@@ -16,13 +16,13 @@ import java.util.UUID;
 public class WalletTransaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id=UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Currency currencyFrom;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Currency currencyTo;
     private BigDecimal transactionAmount;
     private LocalDateTime transactionDate;
