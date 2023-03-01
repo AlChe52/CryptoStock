@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface UserService {
 
-    void createWallet(Long id);
+
 
 
 

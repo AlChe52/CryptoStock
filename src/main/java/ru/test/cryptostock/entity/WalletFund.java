@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class WalletFunds {
+public class WalletFund {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

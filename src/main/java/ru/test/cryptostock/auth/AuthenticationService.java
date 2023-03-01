@@ -7,11 +7,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.test.cryptostock.entity.Wallet;
+import ru.test.cryptostock.repository.WalletRepository;
 import ru.test.cryptostock.service.JwtService;
 import ru.test.cryptostock.repository.UserRepository;
 import ru.test.cryptostock.request.RegisterRequest;
 import ru.test.cryptostock.entity.Role;
 import ru.test.cryptostock.entity.User;
+import ru.test.cryptostock.service.WalletService;
 
 import java.awt.event.WindowListener;
 import java.time.LocalDateTime;
@@ -23,6 +25,8 @@ import java.util.List;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
+    private final WalletService walletService;
+
     private final PasswordEncoder passwordEncoder;
 
     private final JwtService jwtService;
@@ -31,8 +35,6 @@ public class AuthenticationService {
     public AuthenticationResponse  register(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new UsernameNotFoundException("User already register");}
-
-
 
             var user = User.builder()
                     .firstName(request.getFirstName())
@@ -43,10 +45,13 @@ public class AuthenticationService {
                     .build();
             userRepository.save(user);
 
+          var wallet=  walletService.createWallet(user.getId());
+
         var jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .walletId(wallet.getId().toString())
                 .build();
     }
 

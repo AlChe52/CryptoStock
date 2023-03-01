@@ -17,19 +17,5 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    @Override
-    public void createWallet(Long id) {
-        var user = userRepository.findById(id).get();
-        var wallet = Wallet.builder()
-                .creationDate(LocalDateTime.now())
-                .walletTransaction(new ArrayList<>())
-                .walletFunds(new ArrayList<>())
-                .isEnable(true)
-                .build();
-        List<Wallet> wallets = new ArrayList<>();
-        wallets.add(wallet);
-        user.setWallet(wallets);
-        userRepository.save(user);
 
-    }
 }

@@ -22,7 +22,7 @@ public class Wallet {
     @Id
     private UUID id =UUID.randomUUID();
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<WalletFunds> walletFunds;
+    private List<WalletFund> walletFunds;
     @OneToMany (cascade = CascadeType.ALL,orphanRemoval = true)
     private List<WalletTransaction> walletTransaction;
     private LocalDateTime creationDate;
